@@ -30,31 +30,64 @@
 
 				<!-- Modal Add Customer Start-->
 				<div id="modalAddInventory" class="modal">
-					<div class="modal-dialog modal-dialog-centered">
-						<div class="modal-content">
-							<div class="modal-header modal-header-info">
-								<h3 class="modal-title">Add New Inventory</h3>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<!-- form start -->
-							<form id="addInventoryForm">
-								<div class="modal-body">
-									<div class="form-group row">
-										<label for="divisionName" class="col-sm-4 col-form-label">Division Name</label>
-										<div class="col-sm-8">
-											<input name="divisionName" type="text" class="form-control" id="divisionName">
+					<div class="container">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header modal-header-info">
+									<h3 class="modal-title">Add New Inventory</h3>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<!-- form start -->
+								<form id="addInventoryForm">
+									<div class="modal-body">
+										<div class="form-group row">
+											<label for="divisionName" class="col-sm-4 col-form-label">Goods Name</label>
+											<div class="col-sm-8">
+												<input name="divisionName" type="text" class="form-control" id="divisionName">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="divisionName" class="col-sm-4 col-form-label">Brand</label>
+											<div class="col-sm-8">
+												<input name="divisionName" type="text" class="form-control" id="divisionName">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="divisionName" class="col-sm-4 col-form-label">Goods Type</label>
+											<div class="col-sm-8">
+												<input name="divisionName" type="text" class="form-control" id="divisionName">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="divisionName" class="col-sm-4 col-form-label">Quantity</label>
+											<div class="col-sm-8">
+												<input name="divisionName" type="text" class="form-control" id="divisionName">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="divisionName" class="col-sm-4 col-form-label">Unit</label>
+											<div class="col-sm-8">
+												<input name="divisionName" type="text" class="form-control" id="divisionName">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="divisionName" class="col-sm-4 col-form-label">Price</label>
+											<div class="col-sm-8">
+												<input name="divisionName" type="text" class="form-control" id="divisionName">
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="modal-footer">
-									<button id="btnSubmitInventory" type="submit" class="btn btn-info">Save</button>
-								</div>
-							</form>
-							<!-- form end -->
+									<div class="modal-footer">
+										<button id="btnSubmitInventory" type="submit" class="btn btn-info">Save</button>
+									</div>
+								</form>
+								<!-- form end -->
+							</div>
 						</div>
 					</div>
+
 				</div>
 				<!-- Modal Add Customer End -->
 
