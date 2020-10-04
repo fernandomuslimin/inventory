@@ -11,6 +11,12 @@ class Auth extends CI_Controller
 		redirect('PageSwitch/loginPage');
 	}
 
+	public function getSessionData()
+	{
+		$sessionData = $this->Security_model->getSessionData();
+		return $sessionData;
+	}
+
 	public function login()
 	{
 		$username = $this->input->post('username');
@@ -27,7 +33,9 @@ class Auth extends CI_Controller
 						'name' => $result->name,
 						'email' => $result->email,
 						'role' => $result->role,
-						'status' => $result->status
+						'status' => $result->status,
+						'division_id' => $result->division_id,
+						'division_name' => $result->division_name
 					];
 
 					$this->session->set_userdata('session_data', $sess_data);

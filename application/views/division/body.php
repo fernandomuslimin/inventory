@@ -33,7 +33,7 @@
 					<div class="modal-dialog modal-dialog-centered">
 						<div class="modal-content">
 							<div class="modal-header modal-header-info">
-								<h3 class="modal-title">Add New Division</h3>
+								<h3 class="modal-title">title</h3>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>

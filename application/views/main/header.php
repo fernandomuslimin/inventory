@@ -10,12 +10,16 @@
 
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="<?= base_url('asset/') ?>plugins/fontawesome-free/css/all.min.css">
+	<!-- Select2 -->
+	<link rel="stylesheet" href="<?= base_url('asset/') ?>plugins/select2/css/select2.min.css">
+	<link rel="stylesheet" href="<?= base_url('asset/') ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<!-- overlayScrollbars -->
 	<link rel="stylesheet" href="<?= base_url('asset/') ?>dist/css/adminlte.min.css">
 	<!-- DataTables -->
 	<link rel="stylesheet" href="<?= base_url('asset/') ?>plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -33,9 +37,9 @@
 				</li>
 			</ul>
 			<!-- Right navbar links -->
-			<ul class="navbar-nav ml-auto mr-3">
+			<ul class="navbar-nav ml-auto mr-4">
 				<!-- logout button -->
-				<a href="<?= site_url('Auth/logout') ?>"><i class="fas fa-sign-out-alt"></i></a>
+				<a href="<?= site_url('Auth/logout') ?>" data-toggle="tooltip" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
 			</ul>
 		</nav>
 		<!-- /.navbar -->

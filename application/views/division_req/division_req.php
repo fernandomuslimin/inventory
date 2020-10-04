@@ -5,7 +5,7 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1>Inventory Management</h1>
+					<h1>Division Request List</h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -23,7 +23,7 @@
 		<!-- Default box -->
 		<div class="card">
 			<div class="card-header">
-				<h3 class="card-title">Manage Master Inventory Data</h3>
+				<h3 class="card-title">List of Division Request</h3>
 			</div>
 			<div class="card-body">
 				<button id="btnAddInventory" class="btn btn-primary mb-3" type="button" data-toggle="modal" data-target="modalAddInventory">Add Inventory</button>
@@ -153,17 +153,17 @@
 
 				</div>
 				<!-- Modal Send Inventory End -->
-				<table class="col table table-bordered table-striped" id="tblInventory">
+				<table class="col table table-bordered table-striped" id="tblDivisionReq">
 					<thead>
 						<tr>
 							<th>No</th>
-							<th>Goods Name</th>
-							<th>Brand</th>
+							<th>Division</th>
+							<th>Order ID</th>
+							<th>Inventory Name</th>
 							<th>Goods Type</th>
 							<th>Qty</th>
 							<th>Unit</th>
-							<th>Price</th>
-							<th>Input Date</th>
+							<th>Request Date</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -208,55 +208,55 @@
 <script src="<?= base_url('asset/') ?>plugins/sweetalert2/sweetalert2.all.js"></script>
 
 <script>
-	let tblInventory = $('#tblInventory').DataTable();
-	getAllInventory();
+	let tblDivisionReq = $('#tblDivisionReq').DataTable();
+	// getAllInventory();
 
-	$('#btnAddInventory').click(function() {
-		$('#modalAddInventory').modal('show');
-		$('#addInventoryForm').attr('action', '<?= site_url('Inventory/addinventory') ?>');
-		$('.modal-title').text('Add New Inventory');
-	});
+	// $('#btnAddInventory').click(function() {
+	// 	$('#modalAddInventory').modal('show');
+	// 	$('#addInventoryForm').attr('action', '<?= site_url('Inventory/addinventory') ?>');
+	// 	$('.modal-title').text('Add New Inventory');
+	// });
 
-	function clearFields() {
-		$('#goodsName').val('');
-		$('#brand').val('');
-		$('#goodstype').val('');
-		$('#quantity').val('');
-		$('#unit').val('');
-		$('#price').val('');
-	}
+	// function clearFields() {
+	// 	$('#goodsName').val('');
+	// 	$('#brand').val('');
+	// 	$('#goodstype').val('');
+	// 	$('#quantity').val('');
+	// 	$('#unit').val('');
+	// 	$('#price').val('');
+	// }
 
-	$('#addInventoryForm').submit(function(e) {
-		e.preventDefault();
-		let data = $('#addInventoryForm').serialize();
-		let url = $('#addInventoryForm').attr('action');
+	// $('#addInventoryForm').submit(function(e) {
+	// 	e.preventDefault();
+	// 	let data = $('#addInventoryForm').serialize();
+	// 	let url = $('#addInventoryForm').attr('action');
 
-		$.ajax({
-			url: url,
-			method: 'post',
-			data: data,
-			dataType: 'json',
-			type: 'ajax',
-			success: function(res) {
-				Swal.fire({
-					position: 'center',
-					type: res.msg_type,
-					title: res.msg_body,
-					showConfirmButton: false,
-					timer: 1500
-				}).then((result) => {
-					$('#modalAddInventory').modal('hide');
-					clearFields();
-					getAllInventory();
-				});
-			},
-			error: function(res) {
-				Swal.fire(res.msg_head, res.msg_body, res.msg_type);
-			}
-		});
-	});
+	// 	$.ajax({
+	// 		url: url,
+	// 		method: 'post',
+	// 		data: data,
+	// 		dataType: 'json',
+	// 		type: 'ajax',
+	// 		success: function(res) {
+	// 			Swal.fire({
+	// 				position: 'center',
+	// 				type: res.msg_type,
+	// 				title: res.msg_body,
+	// 				showConfirmButton: false,
+	// 				timer: 1500
+	// 			}).then((result) => {
+	// 				$('#modalAddInventory').modal('hide');
+	// 				clearFields();
+	// 				getAllInventory();
+	// 			});
+	// 		},
+	// 		error: function(res) {
+	// 			Swal.fire(res.msg_head, res.msg_body, res.msg_type);
+	// 		}
+	// 	});
+	// });
 
-	async function getAllInventory() {
+	async function getAllDivisionRequest() {
 		let url = '<?= site_url('Inventory/getAllInventory') ?>';
 		let num = 1;
 
@@ -290,79 +290,79 @@
 		});
 	}
 
-	$('#tblInventory').on('click', '.btn-delete', function() {
-		let id = $(this).data('id');
+	// $('#tblInventory').on('click', '.btn-delete', function() {
+	// 	let id = $(this).data('id');
 
-		Swal.fire({
-			title: 'Are you sure want to delete this data?',
-			text: "You won't be able to revert this!",
-			type: 'question',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Delete'
-		}).then((result) => {
-			if (result.value) {
-				$.ajax({
-					method: 'delete',
-					url: '<?= site_url("Inventory/deleteInventory/") ?>' + id,
-					type: 'ajax',
-					dataType: 'json',
-					success: function(res) {
-						Swal.fire({
-							position: 'center',
-							type: res.msg_type,
-							title: res.msg_body,
-							showConfirmButton: false,
-							timer: 1500
-						}).then((result) => {
-							getAllInventory();
-						});
-					},
-					error: function(res) {
-						Swal.fire(res.msg_head, res.msg_body, res.msg_type);
-					}
-				});
-			}
-		});
-	});
+	// 	Swal.fire({
+	// 		title: 'Are you sure want to delete this data?',
+	// 		text: "You won't be able to revert this!",
+	// 		type: 'question',
+	// 		showCancelButton: true,
+	// 		confirmButtonColor: '#3085d6',
+	// 		cancelButtonColor: '#d33',
+	// 		confirmButtonText: 'Delete'
+	// 	}).then((result) => {
+	// 		if (result.value) {
+	// 			$.ajax({
+	// 				method: 'delete',
+	// 				url: '<?= site_url("Inventory/deleteInventory/") ?>' + id,
+	// 				type: 'ajax',
+	// 				dataType: 'json',
+	// 				success: function(res) {
+	// 					Swal.fire({
+	// 						position: 'center',
+	// 						type: res.msg_type,
+	// 						title: res.msg_body,
+	// 						showConfirmButton: false,
+	// 						timer: 1500
+	// 					}).then((result) => {
+	// 						getAllInventory();
+	// 					});
+	// 				},
+	// 				error: function(res) {
+	// 					Swal.fire(res.msg_head, res.msg_body, res.msg_type);
+	// 				}
+	// 			});
+	// 		}
+	// 	});
+	// });
 
-	$('#tblInventory').on('click', '.btn-edit', function() {
-		let id = $(this).data('id');
-		//end point for sending retrieve Inventory by id
-		let url = '<?= site_url('Inventory/getInventoryById/') ?>' + id;
+	// $('#tblInventory').on('click', '.btn-edit', function() {
+	// 	let id = $(this).data('id');
+	// 	//end point for sending retrieve Inventory by id
+	// 	let url = '<?= site_url('Inventory/getInventoryById/') ?>' + id;
 
-		// Initialization action url for edit
-		$('#addInventoryForm').attr('action', '<?= site_url('Inventory/editSelectedInventory/') ?>' + id);
+	// 	// Initialization action url for edit
+	// 	$('#addInventoryForm').attr('action', '<?= site_url('Inventory/editSelectedInventory/') ?>' + id);
 
-		$('.modal-title').text('Edit Existing Inventory');
+	// 	$('.modal-title').text('Edit Existing Inventory');
 
-		$.ajax({
-			url: url,
-			dataType: 'json',
-			method: 'get',
-			type: 'ajax',
-			success: function(res) {
-				$('#goodsName').val(res.goods_name);
-				$('#brandName').val(res.brand);
-				$('#goodsType').val(res.goods_type);
-				$('#quantity').val(res.quantity);
-				$('#unit').val(res.unit);
-				$('#price').val(res.price);
-				$('#modalAddInventory').modal('show');
-			},
-			error: function(res) {
-				Swal.fire(res.msg_head, res.msg_body, res.msg_type);
-			}
-		});
-	});
+	// 	$.ajax({
+	// 		url: url,
+	// 		dataType: 'json',
+	// 		method: 'get',
+	// 		type: 'ajax',
+	// 		success: function(res) {
+	// 			$('#goodsName').val(res.goods_name);
+	// 			$('#brandName').val(res.brand);
+	// 			$('#goodsType').val(res.goods_type);
+	// 			$('#quantity').val(res.quantity);
+	// 			$('#unit').val(res.unit);
+	// 			$('#price').val(res.price);
+	// 			$('#modalAddInventory').modal('show');
+	// 		},
+	// 		error: function(res) {
+	// 			Swal.fire(res.msg_head, res.msg_body, res.msg_type);
+	// 		}
+	// 	});
+	// });
 
-	$('#tblInventory').on('click', '.btn-send', function() {
-		let id = $(this).data('id');
+	// $('#tblInventory').on('click', '.btn-send', function() {
+	// 	let id = $(this).data('id');
 
-		$('#modalSendInventory').modal('show');
+	// 	$('#modalSendInventory').modal('show');
 
-	});
+	// });
 </script>
 </script>
 </body>

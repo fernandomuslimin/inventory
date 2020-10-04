@@ -20,6 +20,20 @@ class Division_model extends CI_Model
 
 		return $this->db->delete('division');
 	}
+
+	public function getDivisionById($id)
+	{
+		$this->db->where('id', $id);
+
+		return $this->db->get('division')->row();
+	}
+
+	public function updateSelectedDivision($id, $data)
+	{
+		$this->db->where('id', $id);
+
+		return $this->db->update('division', $data);
+	}
 }
 
 /* End of file Division.php */

@@ -10,20 +10,48 @@ class PageSwitch extends CI_Controller
 		$this->load->view('login/login');
 	}
 
+	public function getSessionData()
+	{
+		$sessionData = $this->Security_model->getSessionData();
+		return $sessionData;
+	}
+
 	public function divisionPage()
 	{
+		$this->Security_model->check_session();
+		$activeSession = $this->getSessionData();
+
 		$this->load->view('main/header');
-		$this->load->view('main/sidebar');
+		$this->load->view('main/sidebar', $activeSession);
 		$this->load->view('division/body');
 		$this->load->view('division/footer');
 	}
 
 	public function inventoryPage()
 	{
+		$this->Security_model->check_session();
+		$activeSession = $this->getSessionData();
 		$this->load->view('main/header');
-		$this->load->view('main/sidebar');
+		$this->load->view('main/sidebar', $activeSession);
 		$this->load->view('inventory/body');
-		$this->load->view('inventory/footer');
+	}
+
+	public function ReqInventoryPage()
+	{
+		$this->Security_model->check_session();
+		$activeSession = $this->getSessionData();
+		$this->load->view('main/header');
+		$this->load->view('main/sidebar', $activeSession);
+		$this->load->view('request/reqInventory');
+	}
+
+	public function divisionReqPage()
+	{
+		$this->Security_model->check_session();
+		$activeSession = $this->getSessionData();
+		$this->load->view('main/header');
+		$this->load->view('main/sidebar', $activeSession);
+		$this->load->view('division_req/division_req');
 	}
 }
 

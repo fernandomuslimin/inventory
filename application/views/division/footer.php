@@ -2,7 +2,7 @@
 	<div class="float-right d-none d-sm-block">
 		<b>Version</b> 3.0.2
 	</div>
-	<strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+	<strong>Copyright &copy; 2020 <a href="">Kyrat Studio</a>.</strong> All rights
 	reserved.
 </footer>
 
@@ -34,12 +34,14 @@
 
 	$('#btnAddDivision').click(function() {
 		$('#modalAddDivision').modal('show');
+		$('.modal-title').text('Add New Division');
+		$('#addDivisionForm').attr('action', '<?= site_url('Division/addDivision') ?>');
 	});
 
-	$('#addDivisionForm').submit(function(e) {
+	$('#btnSubmitDivision').click(function(e) {
 		e.preventDefault();
 		let data = $('#addDivisionForm').serialize();
-		let url = '<?= site_url('Division/addDivision') ?>';
+		let url = $('#addDivisionForm').attr('action');
 
 		$.ajax({
 			url: url,
@@ -78,7 +80,6 @@
 			success: function(res) {
 				tblDivision.clear();
 				for (let i = 0; i < res.length; i++) {
-					console.log(res[i]);
 					tblDivision.row.add([
 						num + i,
 						res[i].division_name,
@@ -109,7 +110,7 @@
 			if (result.value) {
 				$.ajax({
 					method: 'delete',
-					url: '<?= site_url("Division/deleteDivision") ?>/' + id,
+					url: '<?= site_url("Division/deleteDivision/") ?>' + id,
 					type: 'ajax',
 					dataType: 'json',
 					success: function(res) {
@@ -127,6 +128,31 @@
 						Swal.fire(res.msg_head, res.msg_body, res.msg_type);
 					}
 				});
+			}
+		});
+	});
+
+	$('#tblDivision').on('click', '.btn-edit', function() {
+		let id = $(this).data('id');
+		//end point for sending retrieve division by id
+		let url = '<?= site_url('Division/getDivisionById/') ?>' + id;
+
+		// Initialization action url for edit
+		$('#addDivisionForm').attr('action', '<?= site_url('Division/updateSelectedDivision/') ?>' + id);
+
+		$('.modal-title').text('Edit Existing Division');
+
+		$.ajax({
+			url: url,
+			dataType: 'json',
+			method: 'get',
+			type: 'ajax',
+			success: function(res) {
+				$('#divisionName').val(res.division_name);
+				$('#modalAddDivision').modal('show');
+			},
+			error: function(res) {
+				Swal.fire(res.msg_head, res.msg_body, res.msg_type);
 			}
 		});
 	});
